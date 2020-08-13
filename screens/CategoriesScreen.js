@@ -8,7 +8,10 @@ import {
   Platform,
 } from "react-native";
 
+import { HeaderButton, Item } from "react-navigation-header-buttons";
+
 import { CATEGORIES } from "../data/dummy-data";
+import HeaderButton from "../components/header-button";
 import Colors from "../constants/colors.js";
 import CategoryGridTile from "../components/category-grid-tile.js";
 
@@ -39,6 +42,11 @@ const CategoriesScreen = (props) => {
 
 CategoriesScreen.navigationOptions = {
   headerTitle: "Meal Categories",
+  headerLeft: (
+    <HeaderButton HeaderButtonComponent={HeaderButton}>
+      <Item title="Menu" iconName="ios-menu" onPress={() => {}} />
+    </HeaderButton>
+  ),
 };
 
 const styles = StyleSheet.create({
