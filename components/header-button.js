@@ -1,13 +1,13 @@
 import React from "react";
 import { Platform } from "react-native";
-import { HeaderButton } from "react-navigation-header-buttons";
+import { HeaderButtons } from "react-navigation-header-buttons";
 import { Ionicons } from "@expo/vector-icons";
 
 import Colors from "../constants/colors";
 
 const CustomHeaderbutton = (props) => {
   return (
-    <HeaderButton
+    <HeaderButtons
       {...props}
       IconComponent={Ionicons}
       iconSize={23}
