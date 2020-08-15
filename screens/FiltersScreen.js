@@ -9,10 +9,22 @@ const FiltersScreen = (props) => {
   );
 };
 
-FiltersScreen.navigationOptions = {
-  headerTitle: "Filter Meals",
+FiltersScreen.navigationOptions = (navData) => {
+  return {
+    headerTitle: "Favourite Meals",
+    headerLeft: (
+      <HeaderButtons HeaderButtonComponent={HeaderButton}>
+        <Item
+          title="Menu"
+          iconName="ios-menu"
+          onPress={() => {
+            navData.navigation.toggleDrawer();
+          }}
+        />
+      </HeaderButtons>
+    ),
+  };
 };
-
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
