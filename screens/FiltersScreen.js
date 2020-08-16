@@ -9,22 +9,10 @@ const FiltersScreen = (props) => {
   );
 };
 
-FiltersScreen.navigationOptions = (navData) => {
-  return {
-    headerTitle: "Favourite Meals",
-    headerLeft: (
-      <HeaderButtons HeaderButtonComponent={HeaderButton}>
-        <Item
-          title="Menu"
-          iconName="ios-menu"
-          onPress={() => {
-            navData.navigation.toggleDrawer();
-          }}
-        />
-      </HeaderButtons>
-    ),
-  };
+FiltersScreen.navigationOptions = {
+  headerTitle: "Filter Meals",
 };
+
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
