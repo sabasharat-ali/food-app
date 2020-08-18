@@ -7,7 +7,7 @@ import {
   ImageBackground,
 } from "react-native";
 
-import DefaultText from "../default-text";
+import DefaultText from "../components/default-text";
 
 const MealItem = (props) => {
   return (
