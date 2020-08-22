@@ -10,14 +10,14 @@ import {
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
 import DefaultText from "../components/default-text";
-import { MEALS } from "../data/dummy-data";
 import HeaderButton from "../components/header-button";
 import ListItem from "../components/list-item-style";
 
 const MealDetailScreen = (props) => {
+  const availableMeals = useSelector((state) => state.meals.meals);
   const mealId = props.navigation.getParam("mealId");
 
-  const selectedMeal = MEALS.find((meal) => meal.id === mealId);
+  const selectedMeal = availableMeals.find((meal) => meal.id === mealId);
 
   return (
     <ScrollView>
