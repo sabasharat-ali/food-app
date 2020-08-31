@@ -7,7 +7,11 @@ import {
   Button,
   StyleSheet,
 } from "react-native";
+import { useSelector } from "react-redux";
+
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
+
+import { MEALS } from "../data/dummy-data";
 
 import DefaultText from "../components/default-text";
 import HeaderButton from "../components/header-button";
@@ -18,7 +22,7 @@ const MealDetailScreen = (props) => {
   const mealId = props.navigation.getParam("mealId");
 
   const selectedMeal = availableMeals.find((meal) => meal.id === mealId);
-
+  props.navigation.setParams({ mealTitle: selectedMeal.title });
   return (
     <ScrollView>
       <Image source={{ uri: selectedMeal.imageUrl }} style={styles.image} />
@@ -41,6 +45,7 @@ const MealDetailScreen = (props) => {
 
 MealDetailScreen.navigationOptions = (navigationData) => {
   const mealId = navigationData.navigation.getParam("mealId");
+  const mealTitle = navigationData.navigation.getParam("mealTitle");
   const selectedMeal = MEALS.find((meal) => meal.id === mealId);
   return {
     headerTitle: mealTitle,
