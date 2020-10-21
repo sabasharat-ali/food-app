@@ -1,23 +1,19 @@
-import React from "react";
-import { View, Text, StyleSheet } from "react-native";
-import { HeaderButtons, Item } from "react-navigation-header-buttons";
-import { useSelector } from "react-redux";
+import React from 'react';
+import { HeaderButtons, Item } from 'react-navigation-header-buttons';
+import { useSelector } from 'react-redux';
 
-import HeaderButton from "../components/header-button";
+import HeaderButton from '../components/header-button';
+import MealList from '../components/meal-list';
 
-import MealList from "../components/meal-list";
-import { MEALS } from "../data/dummy-data";
-
-const FavoritesScreen = (props) => {
-  const availableMeals = useSelector((state) => state.meals.favoriteMeals);
+const FavoritesScreen = props => {
+  const favMeals = useSelector(state => state.meals.favoriteMeals);
 
   return <MealList listData={favMeals} navigation={props.navigation} />;
-  //WE ARE PASSING PROPS.NAVIGATION BECAUSE WE ARE USING IT IN THE MEALLIST COMPONENT AND NAVIGATION IS NOT AVAILABLE IN THE CHILD COMPONENTS
 };
 
-FavoritesScreen.navigationOptions = (navData) => {
+FavoritesScreen.navigationOptions = navData => {
   return {
-    headerTitle: "Favorite Meals",
+    headerTitle: 'Your Favorites',
     headerLeft: (
       <HeaderButtons HeaderButtonComponent={HeaderButton}>
         <Item
@@ -28,15 +24,8 @@ FavoritesScreen.navigationOptions = (navData) => {
           }}
         />
       </HeaderButtons>
-    ),
+    )
   };
 };
-const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-});
 
 export default FavoritesScreen;
