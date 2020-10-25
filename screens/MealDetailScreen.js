@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from 'react';
 import {
   ScrollView,
   Image,
@@ -20,10 +20,13 @@ import ListItem from "../components/list-item-style";
 const MealDetailScreen = (props) => {
   const availableMeals = useSelector((state) => state.meals.meals);
   const mealId = props.navigation.getParam("mealId");
-  const currentMealIsFavorite = useSelector((state) => state.meals.favoriteMeals.some(meal => meal.id === mealId))
 
   const selectedMeal = availableMeals.find((meal) => meal.id === mealId);
-  props.navigation.setParams({ mealTitle: selectedMeal.title });
+  // useEffect(() => {
+
+  //   props.navigation.setParams({ mealTitle: selectedMeal.title });
+  // },
+  //  [selectedMeal])
   return (
     <ScrollView>
       <Image source={{ uri: selectedMeal.imageUrl }} style={styles.image} />
@@ -47,7 +50,7 @@ const MealDetailScreen = (props) => {
 MealDetailScreen.navigationOptions = (navigationData) => {
   const mealId = navigationData.navigation.getParam("mealId");
   const mealTitle = navigationData.navigation.getParam("mealTitle");
-  const selectedMeal = MEALS.find((meal) => meal.id === mealId);
+  // const selectedMeal = MEALS.find((meal) => meal.id === mealId);
   return {
     headerTitle: mealTitle,
     headerRight: (
