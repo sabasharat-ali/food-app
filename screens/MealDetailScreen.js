@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useCallback} from 'react';
 import {
   ScrollView,
   Image,
@@ -7,7 +7,7 @@ import {
   Button,
   StyleSheet,
 } from "react-native";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
@@ -16,17 +16,26 @@ import { MEALS } from "../data/dummy-data";
 import DefaultText from "../components/default-text";
 import HeaderButton from "../components/header-button";
 import ListItem from "../components/list-item-style";
+import {toggleFavorite} from '../store/actions/meals'
 
 const MealDetailScreen = (props) => {
   const availableMeals = useSelector((state) => state.meals.meals);
   const mealId = props.navigation.getParam("mealId");
 
   const selectedMeal = availableMeals.find((meal) => meal.id === mealId);
-  // useEffect(() => {
 
-  //   props.navigation.setParams({ mealTitle: selectedMeal.title });
-  // },
-  //  [selectedMeal])
+  const dispatch = useDispatch()
+
+  const toggleFavoriteHandler = useCallback(() => {
+    dispatch(toggleFavorite(mealId));
+  },[dispatch, mealId])
+
+  useEffect(() => {
+
+    // props.navigation.setParams({ mealTitle: selectedMeal.title });
+    props.navigation.setParams({ toggleFav: toggleFavoriteHandler })
+  },
+    [toggleFavoriteHandler]);
   return (
     <ScrollView>
       <Image source={{ uri: selectedMeal.imageUrl }} style={styles.image} />
@@ -48,8 +57,9 @@ const MealDetailScreen = (props) => {
 };
 
 MealDetailScreen.navigationOptions = (navigationData) => {
-  const mealId = navigationData.navigation.getParam("mealId");
+  // const mealId = navigationData.navigation.getParam("mealId");
   const mealTitle = navigationData.navigation.getParam("mealTitle");
+  const toggleFavorite = navigationData.navigation.getParam("toggleFav");
   // const selectedMeal = MEALS.find((meal) => meal.id === mealId);
   return {
     headerTitle: mealTitle,
@@ -58,9 +68,7 @@ MealDetailScreen.navigationOptions = (navigationData) => {
         <Item
           title="Favorite"
           iconName="ios-star"
-          onPress={() => {
-            console.log("Mark as favorite!");
-          }}
+          onPress={toggleFavourite}
         />
       </HeaderButtons>
     ),
