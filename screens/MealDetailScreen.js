@@ -24,18 +24,12 @@ const MealDetailScreen = (props) => {
 
   const selectedMeal = availableMeals.find((meal) => meal.id === mealId);
 
-  const dispatch = useDispatch()
-
-  const toggleFavoriteHandler = useCallback(() => {
-    dispatch(toggleFavorite(mealId));
-  },[dispatch, mealId])
-
   useEffect(() => {
 
-    // props.navigation.setParams({ mealTitle: selectedMeal.title });
-    props.navigation.setParams({ toggleFav: toggleFavoriteHandler })
+    props.navigation.setParams({ mealTitle: selectedMeal.title });
   },
-    [toggleFavoriteHandler]);
+    [selectedMeal]);
+
   return (
     <ScrollView>
       <Image source={{ uri: selectedMeal.imageUrl }} style={styles.image} />
@@ -68,7 +62,7 @@ MealDetailScreen.navigationOptions = (navigationData) => {
         <Item
           title="Favorite"
           iconName="ios-star"
-          onPress={toggleFavourite}
+          onPress={toggleFavorite}
         />
       </HeaderButtons>
     ),
